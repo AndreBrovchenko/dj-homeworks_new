@@ -20,27 +20,9 @@ DATA = {
 }
 
 
-def omlet_view(request):
+def recipe_view(request, dish):
     servings = int(request.GET.get("servings", 1))
-    recipe = DATA['omlet'].copy()
-    for key, value in recipe.items():
-        recipe[key] = value * servings
-    context = {'recipe': recipe}
-    return render(request, 'calculator/index.html', context)
-
-
-def pasta_view(request):
-    servings = int(request.GET.get("servings", 1))
-    recipe = DATA['pasta'].copy()
-    for key, value in recipe.items():
-        recipe[key] = value * servings
-    context = {'recipe': recipe}
-    return render(request, 'calculator/index.html', context)
-
-
-def buter_view(request):
-    servings = int(request.GET.get("servings", 1))
-    recipe = DATA['buter'].copy()
+    recipe = DATA[dish].copy()
     for key, value in recipe.items():
         recipe[key] = value * servings
     context = {'recipe': recipe}
