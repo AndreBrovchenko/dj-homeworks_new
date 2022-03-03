@@ -77,6 +77,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'netology_m2m_relations',
+        'USER': 'user_article',
+        'PASSWORD': 'pass_article',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -129,9 +131,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-
-try:
-    from .settings_local import *
-except ImportError:
-    pass
+# 
+# try:
+#     from .settings_local import *
+# except ImportError:
+#     pass
 
