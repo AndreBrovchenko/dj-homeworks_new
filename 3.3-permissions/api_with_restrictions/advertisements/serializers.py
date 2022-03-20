@@ -44,7 +44,10 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         advertisement_count = len(Advertisement.objects.filter(
             creator=self.context["request"].user.id).all().filter(
             status='OPEN'))
-        msg_error = "У вас имеется 10 не закрытых объявлений. Это максимальное количество"
-        if advertisement_count >= 10 and self.context["request"].method == 'POST':
-            raise serializers.ValidationError(msg_error)
+        msg_error = "Пользователю разрешено иметь 10 открытых объявлений. Вы пытаетесь превысить это количество"
+        if advertisement_count >= 10:
+            if self.context["request"].method == 'POST' \
+                    or (self.context["request"].method == 'PATCH' and data['status'] == 'OPEN'):
+                raise serializers.ValidationError(msg_error)
+
         return data
